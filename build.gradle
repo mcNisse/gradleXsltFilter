@@ -1,0 +1,13 @@
+plugins {
+    id 'base'
+}
+
+tasks.register('transform', Copy) {
+    from('src') {
+        filter(InstXmlFileFilter)
+        filter(XsltFileFilter, template:file('template.xslt'))
+        filter(InstFileRestoreFilter2)
+    }
+
+    into "${layout.buildDirectory.get()}/bar"
+}
