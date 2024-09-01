@@ -11,3 +11,38 @@ tasks.register('transform', Copy) {
 
     into "${layout.buildDirectory.get()}/bar"
 }
+
+tasks.register('transform1', Copy) {
+    from('src') {
+        filter(InstXmlFileFilter)
+        filter(XsltFileFilter, template:file('template.xslt'))
+    }
+
+    into "${layout.buildDirectory.get()}/bar1"
+}
+
+tasks.register('transform2', Copy) {
+    from('src') {
+        filter(XsltFileFilter, template:file('template.xslt'))
+        filter(InstFileRestoreFilter2)
+    }
+
+    into "${layout.buildDirectory.get()}/bar2"
+}
+
+tasks.register('transform3', Copy) {
+    from('src') {
+        filter(XsltFileFilter, template:file('template.xslt'))
+        filter(InstXmlFileFilter)
+    }
+
+    into "${layout.buildDirectory.get()}/bar3"
+}
+tasks.register('transform4', Copy) {
+    from('src') {
+        filter(XsltFileFilter, template:file('template.xslt'))
+    }
+
+    into "${layout.buildDirectory.get()}/bar3"
+}
+
